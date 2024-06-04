@@ -1,9 +1,17 @@
 <script setup lang="ts">
 let travelsRef = ref<Travel[]>()
 
+// we are wrapping this inside `onMounted` to prevent hydration errors since data is coming from `localStorage`
 onMounted(() => {
   travelsRef.value = inject<Travel[]>("travels")
 })
+
+function removeTravel(travelID: number): void {
+  assert(travelsRef.value)
+  travelsRef.value = travelsRef.value.filter((travel) => travel.id !== travelID)
+
+  localStorage.setItem("travels", JSON.stringify(travelsRef.value))
+}
 </script>
 
 <template>
@@ -31,7 +39,8 @@ onMounted(() => {
       <tbody>
         <tr
           class="p-4 [&_td]:text-nowrap [&_td]:border-y [&_td]:border-black [&_td]:p-2"
-          v-for="travel in travels"
+          v-for="travel in travelsRef"
+          :key="travel.id"
         >
           <td class="z-1 border-r">
             <div class="grid w-max grid-cols-2 gap-2 p-2">
@@ -42,7 +51,7 @@ onMounted(() => {
                   fill="rgb(229, 231, 235)"
                 />
               </button>
-              <button>
+              <button @click="removeTravel(travel.id)">
                 <IconTrash2
                   :stroke-width="1"
                   :size="18"
