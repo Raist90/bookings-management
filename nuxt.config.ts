@@ -1,10 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  components: [
+    {
+      path: "@/components",
+      pathPrefix: false,
+    },
+  ],
   devtools: { enabled: true },
   googleFonts: {
     families: {
       Montserrat: [400, 700],
     },
+  },
+  headlessui: {
+    prefix: "Headless",
   },
   imports: {
     dirs: ["assets", "constants", "mocks", "types"],
@@ -18,6 +27,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/google-fonts",
     "nuxt-lucide-icons",
+    "nuxt-headlessui",
   ],
   tailwindcss: {
     cssPath: ["/assets/css/tailwind.css", { injectPosition: "first" }],

@@ -39,6 +39,9 @@ importers:
         specifier: ^4.3.2
         version: 4.3.2(vue@3.4.27(typescript@5.4.5))
     devDependencies:
+      nuxt-headlessui:
+        specifier: ^1.2.0
+        version: 1.2.0(rollup@4.18.0)(vue@3.4.27(typescript@5.4.5))
       nuxt-lucide-icons:
         specifier: ^1.0.4
         version: 1.0.4(rollup@4.18.0)(vue@3.4.27(typescript@5.4.5))
@@ -587,6 +590,12 @@ packages:
 
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
+
+  '@headlessui/vue@1.7.22':
+    resolution: {integrity: sha512-Hoffjoolq1rY+LOfJ+B/OvkhuBXXBFgd8oBlN+l1TApma2dB0En0ucFZrwQtb33SmcCqd32EQd0y07oziXWNYg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -1162,6 +1171,14 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.40.0'
+
+  '@tanstack/virtual-core@3.5.0':
+    resolution: {integrity: sha512-KnPRCkQTyqhanNC0K63GBG3wA8I+D1fQuVnAvcBF8f13akOKeQp1gSbu6f77zCxhEk727iV5oQnbHLYzHrECLg==}
+
+  '@tanstack/vue-virtual@3.5.0':
+    resolution: {integrity: sha512-wvRQ8sFxn/NDr3WvI5XabhFovZ5MBmpEck2GHpTxYunmV63Ovpl30lRu6W5BPQo35a1GqDZ+Pvzlz6WDWRNqqw==}
+    peerDependencies:
+      vue: ^2.7.0 || ^3.0.0
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -3451,6 +3468,9 @@ packages:
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
 
+  nuxt-headlessui@1.2.0:
+    resolution: {integrity: sha512-eidWwA4SFLWFk2KcGMHlrPTJb+ODEt5Bsj6cXjmhDtRYydqvgYXHU1U7563E6/qMuayThumbGUopF1IRqlYHwA==}
+
   nuxt-lucide-icons@1.0.4:
     resolution: {integrity: sha512-LflNOKuQh6cZIFLx/b5e83hMkVSSADYop+8qn09v8UHDZgGY26tuZFon9jHhWeQtrXnJcY2EVMvmAIgKd9jVGg==}
 
@@ -5439,6 +5459,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.2': {}
 
+  '@headlessui/vue@1.7.22(vue@3.4.27(typescript@5.4.5))':
+    dependencies:
+      '@tanstack/vue-virtual': 3.5.0(vue@3.4.27(typescript@5.4.5))
+      vue: 3.4.27(typescript@5.4.5)
+
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
@@ -6301,6 +6326,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+
+  '@tanstack/virtual-core@3.5.0': {}
+
+  '@tanstack/vue-virtual@3.5.0(vue@3.4.27(typescript@5.4.5))':
+    dependencies:
+      '@tanstack/virtual-core': 3.5.0
+      vue: 3.4.27(typescript@5.4.5)
 
   '@trysound/sax@0.2.0': {}
 
@@ -9120,6 +9152,16 @@ snapshots:
   nuxi@3.11.1:
     optionalDependencies:
       fsevents: 2.3.3
+
+  nuxt-headlessui@1.2.0(rollup@4.18.0)(vue@3.4.27(typescript@5.4.5)):
+    dependencies:
+      '@headlessui/vue': 1.7.22(vue@3.4.27(typescript@5.4.5))
+      '@nuxt/kit': 3.11.2(rollup@4.18.0)
+      pathe: 1.1.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - vue
 
   nuxt-lucide-icons@1.0.4(rollup@4.18.0)(vue@3.4.27(typescript@5.4.5)):
     dependencies:

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 let travelsRef = ref<Travel[]>()
+let isOpen = ref(false)
+let toastMsg = ref("")
 
 // we are wrapping this inside `onMounted` to prevent hydration errors since data is coming from `localStorage`
 onMounted(() => {
@@ -8,9 +10,18 @@ onMounted(() => {
 
 function removeTravel(travelID: number): void {
   assert(travelsRef.value)
+  /** @todo Refactor this mess */
+  toastMsg.value = `Travel "${travelsRef.value.find((travel) => travel.id === travelID)?.name}" was correctly removed!`
+
   travelsRef.value = travelsRef.value.filter((travel) => travel.id !== travelID)
 
   localStorage.setItem("travels", JSON.stringify(travelsRef.value))
+
+  isOpen.value = true
+}
+
+function closeDialog(): void {
+  isOpen.value = false
 }
 </script>
 
@@ -18,6 +29,7 @@ function removeTravel(travelID: number): void {
   <div>
     <h1 class="text-4xl">Travels</h1>
   </div>
+  <Toast :closeDialog :isOpen :msg="toastMsg" />
 
   <div class="mx-auto w-full overflow-x-auto">
     <table

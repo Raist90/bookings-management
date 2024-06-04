@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// use SSR-safe IDs for Headless UI
+provideHeadlessUseId(() => useId())
+
 const global = await useGlobal()
 
 // iterating over global to provide all app data to components
