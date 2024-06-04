@@ -9,11 +9,15 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["assets", "constants", "mocks", "types"],
   },
+  lucide: {
+    namePrefix: "Icon",
+  },
   modules: [
     "@nuxt/eslint",
     "@nuxtjs/tailwindcss",
     "@nuxt/image",
     "@nuxtjs/google-fonts",
+    "nuxt-lucide-icons",
   ],
   tailwindcss: {
     cssPath: ["/assets/css/tailwind.css", { injectPosition: "first" }],
