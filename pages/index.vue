@@ -17,6 +17,7 @@ onMounted(() => {
     >
       <thead class="text-nowrap border-2 border-black bg-[#ff4758] text-white">
         <tr class="text-xs [&_th]:px-2 [&_th]:py-4 [&_th]:text-start">
+          <th>Actions</th>
           <th>ID</th>
           <th>Image</th>
           <th>Name</th>
@@ -32,6 +33,24 @@ onMounted(() => {
           class="p-4 [&_td]:text-nowrap [&_td]:border-y [&_td]:border-black [&_td]:p-2"
           v-for="travel in travels"
         >
+          <td class="z-1 border-r">
+            <div class="grid w-max grid-cols-2 gap-2 p-2">
+              <button>
+                <IconPencil
+                  :stroke-width="1"
+                  :size="18"
+                  fill="rgb(229, 231, 235)"
+                />
+              </button>
+              <button>
+                <IconTrash2
+                  :stroke-width="1"
+                  :size="18"
+                  fill="rgb(229, 231, 235)"
+                />
+              </button>
+            </div>
+          </td>
           <td>{{ travel.id }}</td>
           <td>
             <div class="aspect-square w-[50px]">
