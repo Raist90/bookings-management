@@ -1,16 +1,16 @@
 <script setup lang="ts">
 defineProps<{
   closeDialog: () => void
-  isOpen: boolean
+  isToastOpen: boolean
   msg: string
 }>()
 </script>
 
 <template>
-  <HeadlessTransitionRoot appear :show="isOpen" as="template">
+  <HeadlessTransitionRoot appear :show="isToastOpen" as="template">
     <HeadlessDialog
       class="fixed inset-y-10 grid w-full items-end justify-center"
-      :open="isOpen"
+      :open="isToastOpen"
       :onClose="closeDialog"
     >
       <HeadlessTransitionChild
@@ -38,9 +38,10 @@ defineProps<{
           leaveTo="opacity-0 scale-95"
         >
           <HeadlessDialogPanel>
-            <p>
+            <p class="mb-2">
               {{ msg }}
             </p>
+            <button class="text-xs" @click="closeDialog">Dismiss</button>
           </HeadlessDialogPanel>
         </HeadlessTransitionChild>
       </div>
