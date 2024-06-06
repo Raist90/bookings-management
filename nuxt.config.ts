@@ -16,7 +16,13 @@ export default defineNuxtConfig({
     prefix: "Headless",
   },
   imports: {
-    dirs: ["assets", "constants", "mocks", "types"],
+    dirs: ["assets", "constants", "mocks", "schemas", "types"],
+    presets: [
+      {
+        from: "zod",
+        imports: ["z"],
+      },
+    ],
   },
   lucide: {
     namePrefix: "Icon",

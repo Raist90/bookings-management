@@ -1,11 +1,75 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   closeDialog: () => void
   isTravelDialogOpen: boolean
 }>()
+
+const { closeDialog } = props
+
+let isToastOpen = ref(false)
+let toastMsg = ref("")
+function closeToast(): void {
+  isToastOpen.value = false
+}
+
+const formRef = ref({
+  name: null,
+  description: null,
+  departureDate: null,
+  returnDate: null,
+  price: null,
+  averageRating: null,
+})
+
+const validateForm = (form: Record<string, string | null>): boolean => {
+  return Object.values(form).every((value) => value !== null && value !== "")
+}
+
+const isDisabled = computed(() => !validateForm(formRef.value))
+
+let travels = ref<Travel[]>()
+let travelImage = ref<string>()
+
+function generateImage(): void {
+  travelImage.value = `https://picsum.photos/2000?random=${Math.floor(Math.random() * 100)}`
+}
+
+onMounted(() => {
+  travels.value = inject<Travel[]>("travels")
+})
+
+function save(): void {
+  /** @todo Handle this err */
+  assert(travels.value)
+  const travelID = travels.value?.length + 1
+  const travelToAdd = {
+    ...formRef.value,
+    id: travelID,
+    images: [
+      {
+        alt: "",
+        src:
+          travelImage.value || `https://picsum.photos/2000?random=${travelID}`,
+      },
+    ],
+  }
+  const { data, success, error } = travelSchema.safeParse(travelToAdd)
+  /** @todo Handle this error */
+  assert(success, error)
+  travels.value.push(data)
+
+  localStorage.setItem("travels", JSON.stringify(travels.value))
+
+  closeDialog()
+
+  toastMsg.value = `Travel "${travelToAdd.name}" was successfully added!`
+  isToastOpen.value = true
+}
 </script>
 
 <template>
+  <Toast :closeDialog="closeToast" :isToastOpen :msg="toastMsg" />
+
   <HeadlessTransitionRoot appear :show="isTravelDialogOpen" as="template">
     <HeadlessDialog as="div" class="relative" :open="isTravelDialogOpen">
       <HeadlessTransitionChild
@@ -45,11 +109,15 @@ defineProps<{
                 class="grid grid-cols-1 gap-x-2 gap-y-5 p-2 lg:p-8 xl:grid-cols-2 xl:gap-8"
               >
                 <div
-                  class="order-last aspect-square h-[300px] w-full space-y-5 px-2 text-start xl:order-first xl:h-full"
+                  class="order-last aspect-square h-[300px] w-full space-y-5 px-2 text-start md:h-[500px] xl:order-first xl:h-full"
                 >
                   <NuxtImg
                     alt=""
-                    src="https://picsum.photos/2000?random=1"
+                    id="travelImage"
+                    :src="
+                      travelImage ||
+                      `https://picsum.photos/2000?random=${travels.length + 1}`
+                    "
                     class="h-full w-full border border-black object-cover"
                   />
                 </div>
@@ -61,6 +129,7 @@ defineProps<{
                     <div>
                       <label class="mb-2 block" for="name">Name</label>
                       <input
+                        v-model="formRef.name"
                         class="h-9 w-full border border-gray-400 px-3"
                         type="text"
                         placeholder="A trip in Florence"
@@ -73,6 +142,7 @@ defineProps<{
                         >Description</label
                       >
                       <textarea
+                        v-model="formRef.description"
                         class="h-24 w-full resize-none border border-gray-400 px-3 py-2"
                         placeholder="Relax on the beautiful beaches of Hawaii and explore its islands."
                         id="description"
@@ -85,6 +155,7 @@ defineProps<{
                           >Departure date</label
                         >
                         <input
+                          v-model="formRef.departureDate"
                           class="h-9 w-full border border-gray-400 px-3"
                           type="date"
                           id="departureDate"
@@ -95,6 +166,7 @@ defineProps<{
                           >Return date</label
                         >
                         <input
+                          v-model="formRef.returnDate"
                           class="h-9 w-full border border-gray-400 px-3"
                           type="date"
                           id="returnDate"
@@ -106,6 +178,7 @@ defineProps<{
                       <div>
                         <label class="mb-2 block" for="price">Price</label>
                         <input
+                          v-model="formRef.price"
                           class="h-9 w-full border border-gray-400 px-3"
                           type="number"
                           id="price"
@@ -118,6 +191,7 @@ defineProps<{
                           >Average rating</label
                         >
                         <input
+                          v-model="formRef.averageRating"
                           class="h-9 w-full border border-gray-400 px-3"
                           type="number"
                           min="1"
@@ -129,14 +203,30 @@ defineProps<{
                     </fieldset>
                   </form>
 
-                  <button class="mt-7 h-9 w-full border border-gray-400 px-4">
-                    Generate image
-                  </button>
+                  <div class="space-y-2 text-start">
+                    <button
+                      @click="generateImage"
+                      class="mt-7 h-9 w-full border border-gray-400 px-4"
+                    >
+                      Generate image*
+                    </button>
+                    <p class="text-xs">
+                      *This will be random anyway on next page reload. In a
+                      real-life app it would be a proper
+                      <strong>upload image</strong> button instead
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div class="mx-4 mb-8 mt-4 flex justify-end gap-4 xl:mx-8">
-                <button class="w-[200px] border p-4">Save</button>
+                <button
+                  :disabled="isDisabled"
+                  @click="save"
+                  class="w-[200px] border p-4 disabled:opacity-50"
+                >
+                  Save
+                </button>
                 <button @click="closeDialog" class="w-[200px] border p-4">
                   Cancel
                 </button>
