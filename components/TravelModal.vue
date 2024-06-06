@@ -29,14 +29,9 @@ const formRef = ref<Partial<Travel>>(formInitialState)
 
 function updateFormRef(travelToEdit?: Travel): void {
   if (travelToEdit) {
+    const { images, ...rest } = travelToEdit
     formRef.value = {
-      name: travelToEdit.name,
-      description: travelToEdit.description,
-      departureDate: travelToEdit.departureDate,
-      id: travelToEdit.id,
-      returnDate: travelToEdit.returnDate,
-      price: travelToEdit.price,
-      averageRating: travelToEdit.averageRating,
+      ...rest,
     }
   } else {
     formRef.value = formInitialState
