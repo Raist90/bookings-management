@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  editTravel: (travel: Travel) => void
   removeTravel: (travelID: number) => void
   travelsRef: Travel[]
 }>()
@@ -30,7 +31,7 @@ defineProps<{
       >
         <td class="z-1 border-r">
           <div class="grid w-max grid-cols-2 gap-2 p-2">
-            <button>
+            <button @click="editTravel(travel)">
               <IconPencil
                 :stroke-width="1"
                 :size="18"

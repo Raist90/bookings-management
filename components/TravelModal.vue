@@ -2,9 +2,13 @@
 const props = defineProps<{
   closeDialog: () => void
   isTravelDialogOpen: boolean
+  travelToEdit?: Travel
 }>()
 
 const { closeDialog } = props
+
+let travels = ref<Travel[]>()
+let travelImage = ref<string>()
 
 let isToastOpen = ref(false)
 let toastMsg = ref("")
@@ -12,23 +16,46 @@ function closeToast(): void {
   isToastOpen.value = false
 }
 
-const formRef = ref({
-  name: null,
-  description: null,
-  departureDate: null,
-  returnDate: null,
-  price: null,
-  averageRating: null,
-})
+const formInitialState = {
+  name: "",
+  description: "",
+  departureDate: "",
+  returnDate: "",
+  price: 0,
+  averageRating: 0,
+}
 
-const validateForm = (form: Record<string, string | null>): boolean => {
+const formRef = ref<Partial<Travel>>(formInitialState)
+
+function updateFormRef(travelToEdit?: Travel): void {
+  if (travelToEdit) {
+    formRef.value = {
+      name: travelToEdit.name,
+      description: travelToEdit.description,
+      departureDate: travelToEdit.departureDate,
+      id: travelToEdit.id,
+      returnDate: travelToEdit.returnDate,
+      price: travelToEdit.price,
+      averageRating: travelToEdit.averageRating,
+    }
+  } else {
+    formRef.value = formInitialState
+  }
+}
+
+watch(
+  () => props.travelToEdit,
+  (travel) => {
+    updateFormRef(travel)
+  },
+  { immediate: true },
+)
+
+const validateForm = (form: typeof formRef.value): boolean => {
   return Object.values(form).every((value) => value !== null && value !== "")
 }
 
 const isDisabled = computed(() => !validateForm(formRef.value))
-
-let travels = ref<Travel[]>()
-let travelImage = ref<string>()
 
 function generateImage(): void {
   travelImage.value = `https://picsum.photos/2000?random=${Math.floor(Math.random() * 100)}`
@@ -38,7 +65,37 @@ onMounted(() => {
   travels.value = inject<Travel[]>("travels")
 })
 
-function save(): void {
+function updateTravel(): void {
+  assert(travels.value)
+  const travelToAdd = {
+    ...formRef.value,
+    id: formRef.value.id,
+    images: [
+      {
+        alt: "",
+        src:
+          travelImage.value ||
+          `https://picsum.photos/2000?random=${formRef.value.id}`,
+      },
+    ],
+  }
+  const { data, success, error } = travelSchema.safeParse(travelToAdd)
+  /** @todo Handle this error */
+  assert(success, error)
+
+  travels.value[
+    travels.value.findIndex((travel) => travel.id === formRef.value.id)
+  ] = data
+
+  localStorage.setItem("travels", JSON.stringify(travels.value))
+
+  closeDialog()
+
+  toastMsg.value = `Travel "${travelToAdd.name}" was successfully updated!`
+  isToastOpen.value = true
+}
+
+function saveTravel(): void {
   /** @todo Handle this err */
   assert(travels.value)
   const travelID = travels.value?.length + 1
@@ -116,6 +173,7 @@ function save(): void {
                     id="travelImage"
                     :src="
                       travelImage ||
+                      `https://picsum.photos/2000?random=${formRef.id}` ||
                       `https://picsum.photos/2000?random=${travels.length + 1}`
                     "
                     class="h-full w-full border border-black object-cover"
@@ -221,8 +279,17 @@ function save(): void {
 
               <div class="mx-4 mb-8 mt-4 flex justify-end gap-4 xl:mx-8">
                 <button
+                  v-if="props.travelToEdit"
                   :disabled="isDisabled"
-                  @click="save"
+                  @click="updateTravel"
+                  class="w-[200px] border p-4 disabled:opacity-50"
+                >
+                  Update
+                </button>
+                <button
+                  v-else
+                  :disabled="isDisabled"
+                  @click="saveTravel"
                   class="w-[200px] border p-4 disabled:opacity-50"
                 >
                   Save

@@ -3,6 +3,7 @@ let travelsRef = ref<Travel[]>()
 let isToastOpen = ref(false)
 let isTravelDialogOpen = ref(false)
 let toastMsg = ref("")
+let travelToEdit = ref<Travel>()
 
 // we are wrapping this inside `onMounted` to prevent hydration errors since data is coming from `localStorage`
 onMounted(() => {
@@ -24,16 +25,23 @@ function removeTravel(travelID: number): void {
 function closeDialog(): void {
   isToastOpen.value = false
   isTravelDialogOpen.value = false
+  // we reset this so that next time we add a new travel form will be empty
+  travelToEdit.value = undefined
 }
 
 function addTravel(): void {
+  isTravelDialogOpen.value = true
+}
+
+function editTravel(travel: Travel): void {
+  travelToEdit.value = travel
   isTravelDialogOpen.value = true
 }
 </script>
 
 <template>
   <Toast :closeDialog :isToastOpen :msg="toastMsg" />
-  <TravelModal :closeDialog :isTravelDialogOpen />
+  <TravelModal :closeDialog :isTravelDialogOpen :travelToEdit />
 
   <div class="mb-4">
     <h1 class="text-4xl">Travels</h1>
@@ -46,6 +54,11 @@ function addTravel(): void {
   </div>
 
   <div class="mx-auto w-full overflow-x-auto">
-    <TravelsTable v-if="isArray(travelsRef)" :remove-travel :travels-ref />
+    <TravelsTable
+      v-if="isArray(travelsRef)"
+      :edit-travel
+      :remove-travel
+      :travels-ref
+    />
   </div>
 </template>
