@@ -1,6 +1,7 @@
 <script setup lang="ts">
 let travelsRef = ref<Travel[]>()
 let isToastOpen = ref(false)
+let isTravelDialogOpen = ref(false)
 let toastMsg = ref("")
 
 // we are wrapping this inside `onMounted` to prevent hydration errors since data is coming from `localStorage`
@@ -22,18 +23,24 @@ function removeTravel(travelID: number): void {
 
 function closeDialog(): void {
   isToastOpen.value = false
+  isTravelDialogOpen.value = false
+}
+
+function addTravel(): void {
+  isTravelDialogOpen.value = true
 }
 </script>
 
 <template>
   <Toast :closeDialog :isToastOpen :msg="toastMsg" />
+  <TravelModal :closeDialog :isTravelDialogOpen />
 
   <div class="mb-4">
     <h1 class="text-4xl">Travels</h1>
   </div>
 
   <div>
-    <button class="flex gap-3 border p-4">
+    <button @click="addTravel" class="flex gap-3 border p-4">
       <IconCirclePlus /> Add a new travel
     </button>
   </div>

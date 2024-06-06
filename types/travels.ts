@@ -5,6 +5,7 @@ type Travel = {
   departureDate: string
   description: string
   id: number
+  /** @todo Maybe make this one a single image */
   images: Image[]
   name: string
   price: number
