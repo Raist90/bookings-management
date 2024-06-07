@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+  title: `Travels | ${APP_NAME}`,
+})
+
 let travelsRef = ref<Travel[]>()
 let isToastOpen = ref(false)
 let isTravelDialogOpen = ref(false)

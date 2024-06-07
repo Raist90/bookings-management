@@ -1,4 +1,6 @@
-export { NO_CLIENTSIDE, NO_SERVERSIDE }
+export { APP_NAME, NO_CLIENTSIDE, NO_SERVERSIDE }
+
+const APP_NAME = "WeRoad Test"
 
 // error messages
 function NO_SERVERSIDE(funcName: string): string {
