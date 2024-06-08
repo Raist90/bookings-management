@@ -22,6 +22,10 @@ export default defineNuxtConfig({
         from: "zod",
         imports: ["z"],
       },
+      {
+        from: "clsx",
+        imports: ["clsx"],
+      },
     ],
   },
   lucide: {
