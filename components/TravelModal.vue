@@ -62,6 +62,7 @@ onMounted(() => {
 
 function updateTravel(): void {
   assert(travels.value)
+  /** @todo Rename this one to `travelToUpdate` */
   const travelToAdd = {
     ...formRef.value,
     id: formRef.value.id,

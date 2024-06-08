@@ -30,18 +30,45 @@ let travelRef = computed(() =>
   travels.find((travel) => travel.id === selectedTravel.value.id),
 )
 let bookings = ref<Booking[]>()
-/** @todo This will hold the data to write on `localStorage` */
-let booking = ref<Booking>()
-let customer = ref<Booking["customer"]>({
+let initialCustomerState = {
   age: 0,
   email: "",
   gender: "",
   name: "",
   phone: "",
-})
+}
+
+let bookingToEditID = ref<number>()
+let customer = ref<Booking["customer"]>(initialCustomerState)
 const paymentTypes = ["Credit transfer", "PayPal", "Revolut"] as const
 let paymentType = ref<(typeof paymentTypes)[number]>()
 let notes = ref<Booking["notes"]>()
+
+let isToastOpen = ref(false)
+let toastMsg = ref("")
+function closeToast(): void {
+  isToastOpen.value = false
+}
+
+function updateBookingRef(bookingToEdit?: Booking): void {
+  if (bookingToEdit) {
+    customer.value = bookingToEdit.customer
+    paymentType.value = bookingToEdit.paymentType
+    selectedTravel.value = travels.find(
+      (travel) => travel.id === bookingToEdit.travelId,
+    )!
+    notes.value = bookingToEdit.notes
+    bookingToEditID.value = bookingToEdit.id
+  }
+}
+
+watch(
+  () => props.bookingToEdit,
+  (booking) => {
+    updateBookingRef(booking)
+  },
+  { immediate: true },
+)
 
 const filteredTravel = computed(() =>
   query.value === ""
@@ -72,7 +99,31 @@ const isPaymentTypeButtonDisabled = computed(
 )
 
 // handlers
-function updateBooking(): void {}
+function updateBooking(): void {
+  assert(bookings.value)
+  assert(travelRef.value)
+  const bookingToUpdate = {
+    customer: customer.value,
+    paymentType: paymentType.value,
+    travelId: travelRef.value.id,
+    notes: notes.value,
+    id: bookingToEditID.value,
+  }
+  const { data, success, error } = bookingSchema.safeParse(bookingToUpdate)
+  /** @todo Handle this error */
+  assert(success, error)
+
+  bookings.value[
+    bookings.value.findIndex((booking) => booking.id === bookingToUpdate.id)
+  ] = data
+
+  localStorage.setItem("bookings", JSON.stringify(bookings.value))
+
+  resetForm()
+
+  toastMsg.value = `Booking with ID of "${bookingToUpdate.id}" was successfully updated!`
+  isToastOpen.value = true
+}
 function saveBooking(): void {
   assert(bookings.value)
   assert(travelRef.value)
@@ -90,6 +141,11 @@ function saveBooking(): void {
   bookings.value.push(data)
 
   localStorage.setItem("bookings", JSON.stringify(bookings.value))
+
+  resetForm()
+
+  toastMsg.value = `Booking with ID of "${bookingToAdd.id}" was successfully added!`
+  isToastOpen.value = true
 }
 function goToSecondStep(): void {
   formRef.value.firstStep.isActive = false
@@ -104,15 +160,19 @@ function resetForm(): void {
   formRef.value.secondStep.isActive = false
   formRef.value.thirdStep.isActive = false
   props.closeDialog()
+  // reset forms values
+  customer.value = initialCustomerState
+  paymentType.value = undefined
+  selectedTravel.value = travels[0]
+  notes.value = undefined
 }
-
-/** @todo Make sure to remove this one once you've done */
-const isDisabled = false
 
 onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
 </script>
 
 <template>
+  <Toast :closeDialog="closeToast" :isToastOpen :msg="toastMsg" />
+
   <HeadlessTransitionRoot appear :show="isBookingDialogOpen" as="template">
     <HeadlessDialog as="div" class="relative" :open="isBookingDialogOpen">
       <HeadlessTransitionChild
@@ -244,16 +304,6 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
 
               <div class="mx-4 mb-8 mt-4 flex justify-end gap-4 xl:mx-8">
                 <button
-                  v-if="props.bookingToEdit"
-                  :disabled="isDisabled"
-                  @click="updateBooking"
-                  class="w-[200px] border p-4 disabled:opacity-50"
-                >
-                  Update
-                </button>
-                <button
-                  v-else
-                  :disabled="isDisabled"
                   @click="goToSecondStep"
                   class="w-[200px] border p-4 disabled:opacity-50"
                 >
@@ -352,8 +402,8 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                 <button
                   @click="
                     () => {
-                      ;(formRef.firstStep.isActive = true),
-                        (formRef.secondStep.isActive = false)
+                      formRef.firstStep.isActive = true
+                      formRef.secondStep.isActive = false
                     }
                   "
                   class="w-[200px] border p-4 disabled:opacity-50"
@@ -414,7 +464,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                   <textarea
                     v-model="notes"
                     class="h-2/3 w-full resize-none border border-gray-400 px-3 py-2"
-                    placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    placeholder="Extra luggage"
                     id="notes"
                   ></textarea>
                 </div>
@@ -424,8 +474,8 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                 <button
                   @click="
                     () => {
-                      ;(formRef.secondStep.isActive = true),
-                        (formRef.thirdStep.isActive = false)
+                      formRef.secondStep.isActive = true
+                      formRef.thirdStep.isActive = false
                     }
                   "
                   class="w-[200px] border p-4 disabled:opacity-50"
@@ -434,7 +484,6 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                 </button>
                 <button
                   v-if="props.bookingToEdit"
-                  :disabled="isDisabled"
                   @click="updateBooking"
                   class="w-[200px] border p-4 disabled:opacity-50"
                 >

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 defineProps<{
   bookingsRef: Booking[]
+  editBooking: (booking: Booking) => void
+  removeBooking: (bookingID: number) => void
 }>()
 </script>
 
@@ -25,18 +27,17 @@ defineProps<{
       <tr
         class="p-4 [&_td]:text-nowrap [&_td]:border-y [&_td]:border-black [&_td]:p-2"
         v-for="booking in bookingsRef"
-        :key="booking.id"
       >
         <td class="z-1 w-0 border-r">
           <div class="grid w-max grid-cols-2 gap-2 p-2">
-            <button @click="">
+            <button @click="editBooking(booking)">
               <IconPencil
                 :stroke-width="1"
                 :size="18"
                 fill="rgb(229, 231, 235)"
               />
             </button>
-            <button @click="">
+            <button @click="removeBooking(booking.id)">
               <IconTrash2
                 :stroke-width="1"
                 :size="18"
