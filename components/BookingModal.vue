@@ -293,7 +293,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                     <NuxtImg
                       class="h-full w-full object-cover"
                       alt=""
-                      :src="`https://picsum.photos/2000?random=${travelRef.id}`"
+                      :src="`${PICSUM_URL}/2000?random=${travelRef.id}`"
                     />
                   </div>
                 </div>

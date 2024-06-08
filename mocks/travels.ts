@@ -12,7 +12,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Paris",
-        src: "https://picsum.photos/2000?random=1",
+        src: `${PICSUM_URL}/2000?random=1`,
       },
     ],
   },
@@ -28,7 +28,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Amazon",
-        src: "https://picsum.photos/2000?random=2",
+        src: `${PICSUM_URL}/2000?random=2`,
       },
     ],
   },
@@ -43,7 +43,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Kenya Safari",
-        src: "https://picsum.photos/2000?random=3",
+        src: `${PICSUM_URL}/2000?random=3`,
       },
     ],
   },
@@ -59,7 +59,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Maldives",
-        src: "https://picsum.photos/2000?random=4",
+        src: `${PICSUM_URL}/2000?random=4`,
       },
     ],
   },
@@ -74,7 +74,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Japan",
-        src: "https://picsum.photos/2000?random=5",
+        src: `${PICSUM_URL}/2000?random=5`,
       },
     ],
   },
@@ -90,7 +90,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Hawaii",
-        src: "https://picsum.photos/2000?random=6",
+        src: `${PICSUM_URL}/2000?random=6`,
       },
     ],
   },
@@ -105,7 +105,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Rome",
-        src: "https://picsum.photos/2000?random=7",
+        src: `${PICSUM_URL}/2000?random=7`,
       },
     ],
   },
@@ -121,7 +121,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Caribbean Cruise",
-        src: "https://picsum.photos/2000?random=8",
+        src: `${PICSUM_URL}/2000?random=8`,
       },
     ],
   },
@@ -136,7 +136,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Great Wall of China",
-        src: "https://picsum.photos/2000?random=9",
+        src: `${PICSUM_URL}/2000?random=9`,
       },
     ],
   },
@@ -152,7 +152,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "New York City",
-        src: "https://picsum.photos/2000?random=10",
+        src: `${PICSUM_URL}/2000?random=10`,
       },
     ],
   },
@@ -167,7 +167,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Iceland",
-        src: "https://picsum.photos/2000?random=11",
+        src: `${PICSUM_URL}/2000?random=11`,
       },
     ],
   },
@@ -182,7 +182,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Dubai",
-        src: "https://picsum.photos/2000?random=12",
+        src: `${PICSUM_URL}/2000?random=12`,
       },
     ],
   },
@@ -197,7 +197,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "South Africa Safari",
-        src: "https://picsum.photos/2000?random=13",
+        src: `${PICSUM_URL}/2000?random=13`,
       },
     ],
   },
@@ -212,7 +212,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Egypt",
-        src: "https://picsum.photos/2000?random=14",
+        src: `${PICSUM_URL}/2000?random=14`,
       },
     ],
   },
@@ -227,7 +227,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Australia",
-        src: "https://picsum.photos/2000?random=15",
+        src: `${PICSUM_URL}/2000?random=15`,
       },
     ],
   },
@@ -242,7 +242,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Switzerland",
-        src: "https://picsum.photos/2000?random=16",
+        src: `${PICSUM_URL}/2000?random=16`,
       },
     ],
   },
@@ -257,7 +257,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "India",
-        src: "https://picsum.photos/2000?random=17",
+        src: `${PICSUM_URL}/2000?random=17`,
       },
     ],
   },
@@ -273,7 +273,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Greece",
-        src: "https://picsum.photos/2000?random=18",
+        src: `${PICSUM_URL}/2000?random=18`,
       },
     ],
   },
@@ -288,7 +288,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "Alaska",
-        src: "https://picsum.photos/2000?random=19",
+        src: `${PICSUM_URL}/2000?random=19`,
       },
     ],
   },
@@ -303,7 +303,7 @@ const travels: Travel[] = [
     images: [
       {
         alt: "London",
-        src: "https://picsum.photos/2000?random=20",
+        src: `${PICSUM_URL}/2000?random=20`,
       },
     ],
   },

@@ -53,7 +53,7 @@ const validateForm = (form: typeof formRef.value): boolean => {
 const isDisabled = computed(() => !validateForm(formRef.value))
 
 function generateImage(): void {
-  travelImage.value = `https://picsum.photos/2000?random=${Math.floor(Math.random() * 100)}`
+  travelImage.value = `${PICSUM_URL}/2000?random=${Math.floor(Math.random() * 100)}`
 }
 
 onMounted(() => {
@@ -69,8 +69,7 @@ function updateTravel(): void {
       {
         alt: "",
         src:
-          travelImage.value ||
-          `https://picsum.photos/2000?random=${formRef.value.id}`,
+          travelImage.value || `${PICSUM_URL}/2000?random=${formRef.value.id}`,
       },
     ],
   }
@@ -99,8 +98,7 @@ function saveTravel(): void {
     images: [
       {
         alt: "",
-        src:
-          travelImage.value || `https://picsum.photos/2000?random=${travelID}`,
+        src: travelImage.value || `${PICSUM_URL}/2000?random=${travelID}`,
       },
     ],
   }
@@ -166,8 +164,8 @@ function saveTravel(): void {
                     id="travelImage"
                     :src="
                       travelImage ||
-                      `https://picsum.photos/2000?random=${formRef.id}` ||
-                      `https://picsum.photos/2000?random=${travels.length + 1}`
+                      `${PICSUM_URL}/2000?random=${formRef.id}` ||
+                      `${PICSUM_URL}/2000?random=${travels.length + 1}`
                     "
                     class="h-full w-full border border-black object-cover"
                   />
