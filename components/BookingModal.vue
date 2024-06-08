@@ -110,7 +110,6 @@ function updateBooking(): void {
     id: bookingToEditID.value,
   }
   const { data, success, error } = bookingSchema.safeParse(bookingToUpdate)
-  /** @todo Handle this error */
   assert(success, error)
 
   bookings.value[
@@ -127,7 +126,6 @@ function updateBooking(): void {
 function saveBooking(): void {
   assert(bookings.value)
   assert(travelRef.value)
-  /** @todo Add notes */
   const bookingToAdd = {
     customer: customer.value,
     id: bookings.value.length + 1,
@@ -136,7 +134,6 @@ function saveBooking(): void {
     notes: notes.value,
   }
   const { data, success, error } = bookingSchema.safeParse(bookingToAdd)
-  /** @todo Handle this error */
   assert(success, error)
   bookings.value.push(data)
 

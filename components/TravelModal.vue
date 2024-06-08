@@ -62,8 +62,7 @@ onMounted(() => {
 
 function updateTravel(): void {
   assert(travels.value)
-  /** @todo Rename this one to `travelToUpdate` */
-  const travelToAdd = {
+  const travelToUpdate = {
     ...formRef.value,
     id: formRef.value.id,
     images: [
@@ -75,8 +74,7 @@ function updateTravel(): void {
       },
     ],
   }
-  const { data, success, error } = travelSchema.safeParse(travelToAdd)
-  /** @todo Handle this error */
+  const { data, success, error } = travelSchema.safeParse(travelToUpdate)
   assert(success, error)
 
   travels.value[
@@ -87,13 +85,13 @@ function updateTravel(): void {
 
   closeDialog()
 
-  toastMsg.value = `Travel "${travelToAdd.name}" was successfully updated!`
+  toastMsg.value = `Travel "${travelToUpdate.name}" was successfully updated!`
   isToastOpen.value = true
 }
 
 function saveTravel(): void {
-  /** @todo Handle this err */
-  assert(travels.value)
+  const errMsg = `No travels data on ${saveTravel.name}`
+  assert(travels.value, errMsg)
   const travelID = travels.value?.length + 1
   const travelToAdd = {
     ...formRef.value,
@@ -107,7 +105,6 @@ function saveTravel(): void {
     ],
   }
   const { data, success, error } = travelSchema.safeParse(travelToAdd)
-  /** @todo Handle this error */
   assert(success, error)
   travels.value.push(data)
 

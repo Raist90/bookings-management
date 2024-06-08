@@ -17,8 +17,12 @@ onMounted(() => {
 
 function removeTravel(travelID: number): void {
   assert(travelsRef.value)
-  /** @todo Refactor this mess */
-  toastMsg.value = `Travel "${travelsRef.value.find((travel) => travel.id === travelID)?.name}" was correctly removed!`
+  const travelToRemove = travelsRef.value.find(
+    (travel) => travel.id === travelID,
+  )?.name
+  const errMsg = `There was an error while removing travel with ${removeTravel.name} function`
+  assert(travelToRemove, errMsg)
+  toastMsg.value = `Travel "${travelToRemove}" was correctly removed!`
 
   travelsRef.value = travelsRef.value.filter((travel) => travel.id !== travelID)
 
