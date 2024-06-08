@@ -11,7 +11,9 @@ for (const key in global) {
 </script>
 
 <template>
-  <main class="mx-auto my-8 w-10/12 font-body">
-    <NuxtPage />
-  </main>
+  <Navigation>
+    <main class="mx-auto my-8 w-10/12 font-body">
+      <NuxtPage />
+    </main>
+  </Navigation>
 </template>

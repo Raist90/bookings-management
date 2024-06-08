@@ -305,11 +305,11 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
               <div class="mx-4 mb-8 mt-4 flex justify-end gap-4 xl:mx-8">
                 <button
                   @click="goToSecondStep"
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base button-primary w-[200px] disabled:opacity-50"
                 >
                   Next
                 </button>
-                <button @click="resetForm" class="w-[200px] border p-4">
+                <button @click="resetForm" class="button-base w-[200px]">
                   Cancel
                 </button>
               </div>
@@ -406,18 +406,18 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       formRef.secondStep.isActive = false
                     }
                   "
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base w-[200px] disabled:opacity-50"
                 >
                   Back
                 </button>
                 <button
                   :disabled="isCustomerFormButtonDisabled"
                   @click="goToThirdStep"
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base button-primary w-[200px] disabled:opacity-50"
                 >
                   Next
                 </button>
-                <button @click="resetForm" class="w-[200px] border p-4">
+                <button @click="resetForm" class="button-base w-[200px]">
                   Cancel
                 </button>
               </div>
@@ -478,14 +478,14 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       formRef.thirdStep.isActive = false
                     }
                   "
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base w-[200px] disabled:opacity-50"
                 >
                   Back
                 </button>
                 <button
                   v-if="props.bookingToEdit"
                   @click="updateBooking"
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base button-primary w-[200px] disabled:opacity-50"
                 >
                   Update
                 </button>
@@ -493,11 +493,11 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                   v-else
                   :disabled="isPaymentTypeButtonDisabled"
                   @click="saveBooking"
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base button-primary w-[200px] disabled:opacity-50"
                 >
                   Save
                 </button>
-                <button @click="resetForm" class="w-[200px] border p-4">
+                <button @click="resetForm" class="button-base w-[200px]">
                   Cancel
                 </button>
               </div>

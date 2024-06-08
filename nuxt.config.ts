@@ -40,7 +40,7 @@ export default defineNuxtConfig({
     "nuxt-headlessui",
   ],
   tailwindcss: {
-    cssPath: ["/assets/css/tailwind.css", { injectPosition: "first" }],
+    cssPath: ["assets/css/tailwind.css", { injectPosition: "first" }],
     configPath: "tailwind.config",
   },
 })

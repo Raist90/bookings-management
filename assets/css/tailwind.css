@@ -1,3 +1,11 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button-base {
+  @apply rounded-lg border border-b-4 border-black p-2;
+}
+
+.button-primary {
+  @apply bg-primary-color text-white;
+}

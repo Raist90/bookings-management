@@ -61,7 +61,7 @@ function closeDialog(): void {
   </div>
 
   <div>
-    <button @click="addBooking" class="flex gap-3 border p-4">
+    <button @click="addBooking" class="button-base flex gap-2">
       <IconCirclePlus /> Add a new booking
     </button>
   </div>

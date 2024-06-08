@@ -64,7 +64,7 @@ function editTravel(travel: Travel): void {
   </div>
 
   <div>
-    <button @click="addTravel" class="flex gap-3 border p-4">
+    <button @click="addTravel" class="button-base flex gap-2">
       <IconCirclePlus /> Add a new travel
     </button>
   </div>

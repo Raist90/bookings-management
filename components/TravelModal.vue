@@ -278,7 +278,7 @@ function saveTravel(): void {
                   v-if="props.travelToEdit"
                   :disabled="isDisabled"
                   @click="updateTravel"
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base button-primary w-[200px] disabled:opacity-50"
                 >
                   Update
                 </button>
@@ -286,11 +286,11 @@ function saveTravel(): void {
                   v-else
                   :disabled="isDisabled"
                   @click="saveTravel"
-                  class="w-[200px] border p-4 disabled:opacity-50"
+                  class="button-base button-primary w-[200px] disabled:opacity-50"
                 >
                   Save
                 </button>
-                <button @click="closeDialog" class="w-[200px] border p-4">
+                <button @click="closeDialog" class="button-base w-[200px]">
                   Cancel
                 </button>
               </div>
