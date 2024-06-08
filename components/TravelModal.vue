@@ -177,14 +177,14 @@ function saveTravel(): void {
                 </div>
 
                 <div
-                  class="grid h-full p-2 xl:border xl:border-dashed xl:border-gray-400 xl:p-4"
+                  class="xl:gray-borders grid h-full p-2 xl:border xl:border-dashed xl:p-4"
                 >
                   <form class="space-y-5 text-start">
                     <div>
                       <label class="mb-2 block" for="name">Name</label>
                       <input
                         v-model="formRef.name"
-                        class="h-9 w-full border border-gray-400 px-3"
+                        class="gray-borders h-9 w-full border px-3"
                         type="text"
                         placeholder="A trip in Florence"
                         id="name"
@@ -197,7 +197,7 @@ function saveTravel(): void {
                       >
                       <textarea
                         v-model="formRef.description"
-                        class="h-24 w-full resize-none border border-gray-400 px-3 py-2"
+                        class="gray-borders h-24 w-full resize-none border px-3 py-2"
                         placeholder="Relax on the beautiful beaches of Hawaii and explore its islands."
                         id="description"
                       ></textarea>
@@ -210,7 +210,7 @@ function saveTravel(): void {
                         >
                         <input
                           v-model="formRef.departureDate"
-                          class="h-9 w-full border border-gray-400 px-3"
+                          class="gray-borders h-9 w-full border px-3"
                           type="date"
                           id="departureDate"
                         />
@@ -221,7 +221,7 @@ function saveTravel(): void {
                         >
                         <input
                           v-model="formRef.returnDate"
-                          class="h-9 w-full border border-gray-400 px-3"
+                          class="gray-borders h-9 w-full border px-3"
                           type="date"
                           id="returnDate"
                         />
@@ -233,7 +233,7 @@ function saveTravel(): void {
                         <label class="mb-2 block" for="price">Price</label>
                         <input
                           v-model="formRef.price"
-                          class="h-9 w-full border border-gray-400 px-3"
+                          class="gray-borders h-9 w-full border px-3"
                           type="number"
                           id="price"
                           min="0"
@@ -246,7 +246,7 @@ function saveTravel(): void {
                         >
                         <input
                           v-model="formRef.averageRating"
-                          class="h-9 w-full border border-gray-400 px-3"
+                          class="gray-borders h-9 w-full border px-3"
                           type="number"
                           min="1"
                           max="5"
@@ -260,7 +260,7 @@ function saveTravel(): void {
                   <div class="space-y-2 text-start">
                     <button
                       @click="generateImage"
-                      class="mt-7 h-9 w-full border border-gray-400 px-4"
+                      class="gray-borders mt-7 h-9 w-full border px-4"
                     >
                       Generate image*
                     </button>

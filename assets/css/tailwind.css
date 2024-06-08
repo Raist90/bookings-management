@@ -9,3 +9,7 @@
 .button-primary {
   @apply bg-primary-color text-white;
 }
+
+.gray-borders {
+  @apply border-gray-400;
+}

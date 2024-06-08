@@ -222,7 +222,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                     >
                       <HeadlessComboboxInput
                         id="search"
-                        class="h-9 w-full border border-gray-400 px-3 focus:ring-0"
+                        class="gray-borders h-9 w-full border px-3 focus:ring-0"
                         :display-value="
                           (selectedTravel: any) => selectedTravel.name
                         "
@@ -238,7 +238,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       </HeadlessComboboxButton>
                     </div>
                     <HeadlessComboboxOptions
-                      class="mt-1 max-h-60 w-72 overflow-auto border border-gray-400"
+                      class="gray-borders mt-1 max-h-60 w-72 overflow-auto border"
                     >
                       <HeadlessComboboxOption
                         as="template"
@@ -280,10 +280,10 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
 
                 <div
                   v-if="travelRef"
-                  class="relative grid h-[400px] w-full gap-8 border border-gray-400 xl:h-[600px]"
+                  class="gray-borders relative grid h-[400px] w-full gap-8 border xl:h-[600px]"
                 >
                   <div
-                    class="w-full space-y-2 place-self-end border-t border-gray-400 bg-white p-4 text-start"
+                    class="gray-borders w-full space-y-2 place-self-end border-t bg-white p-4 text-start"
                   >
                     <p>
                       <strong>{{ travelRef.name }}</strong>
@@ -332,7 +332,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                     <label class="mb-2 block" for="name">Name</label>
                     <input
                       v-model="customer.name"
-                      class="h-9 w-full border border-gray-400 px-3"
+                      class="gray-borders h-9 w-full border px-3"
                       type="text"
                       placeholder="John Doe"
                       id="name"
@@ -343,7 +343,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                     <label class="mb-2 block" for="email">Email</label>
                     <input
                       v-model="customer.email"
-                      class="h-9 w-full border border-gray-400 px-3"
+                      class="gray-borders h-9 w-full border px-3"
                       placeholder="john.doe@example.com"
                       id="email"
                     />
@@ -353,7 +353,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                     <label class="mb-2 block" for="phone">Phone</label>
                     <input
                       v-model="customer.phone"
-                      class="h-9 w-full border border-gray-400 px-3"
+                      class="gray-borders h-9 w-full border px-3"
                       placeholder="+1234567890"
                       id="phone"
                     />
@@ -364,7 +364,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       <label class="mb-2 block" for="age">Age</label>
                       <input
                         v-model="customer.age"
-                        class="h-9 w-full border border-gray-400 px-3"
+                        class="gray-borders h-9 w-full border px-3"
                         type="number"
                         id="age"
                       />
@@ -375,7 +375,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       <div class="space-x-2">
                         <input
                           v-model="customer.gender"
-                          class="border border-gray-400 px-3"
+                          class="gray-borders border px-3"
                           type="radio"
                           id="male"
                           value="male"
@@ -386,7 +386,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       <div class="space-x-2">
                         <input
                           v-model="customer.gender"
-                          class="border border-gray-400 px-3"
+                          class="gray-borders border px-3"
                           type="radio"
                           id="female"
                           value="female"
@@ -444,7 +444,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                       clsx(
                         paymentType === payment &&
                           'border-none bg-primary-color font-bold text-white',
-                        'flex h-9 items-center gap-2 border border-gray-400 p-8',
+                        'gray-borders flex h-9 items-center gap-2 border p-8',
                       )
                     "
                     v-for="payment in paymentTypes"
@@ -463,7 +463,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
                   <label class="mb-5 block" for="notes">Additional notes</label>
                   <textarea
                     v-model="notes"
-                    class="h-2/3 w-full resize-none border border-gray-400 px-3 py-2"
+                    class="gray-borders h-2/3 w-full resize-none border px-3 py-2"
                     placeholder="Extra luggage"
                     id="notes"
                   ></textarea>
