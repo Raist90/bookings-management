@@ -27,6 +27,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.14.2",
     "nuxt-headlessui": "^1.2.0",
     "nuxt-lucide-icons": "^1.0.4"
   }
