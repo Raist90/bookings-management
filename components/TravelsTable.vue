@@ -10,7 +10,9 @@ defineProps<{
   <table
     class="my-10 w-full border-collapse border-2 border-b-8 border-black text-sm"
   >
-    <thead class="text-nowrap border-2 border-black bg-[#ff4758] text-white">
+    <thead
+      class="text-nowrap border-2 border-black bg-primary-color text-white"
+    >
       <tr class="text-xs [&_th]:px-2 [&_th]:py-4 [&_th]:text-start">
         <th>Actions</th>
         <th>ID</th>

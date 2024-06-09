@@ -200,7 +200,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
               class="mx-2 h-2/3 w-full transform overflow-auto border-2 border-b-8 border-black bg-white text-center align-middle font-body shadow-xl transition-all xl:mx-0 xl:h-auto xl:w-2/3 xl:overflow-hidden"
             >
               <div
-                class="sticky top-0 z-[1] flex justify-between border-b-2 border-black bg-[#ff4758] p-4 text-start text-white"
+                class="sticky top-0 z-[1] flex justify-between border-b-2 border-black bg-primary-color p-4 text-start text-white"
               >
                 <p><strong>Add a new booking</strong></p>
                 <button @click="resetForm"><IconX /></button>
@@ -317,7 +317,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
               class="mx-2 h-auto w-full transform overflow-auto border-2 border-b-8 border-black bg-white text-center align-middle font-body shadow-xl transition-all xl:mx-0 xl:w-1/3 xl:overflow-hidden"
             >
               <div
-                class="sticky top-0 z-[1] flex justify-between border-b-2 border-black bg-[#ff4758] p-4 text-start text-white"
+                class="sticky top-0 z-[1] flex justify-between border-b-2 border-black bg-primary-color p-4 text-start text-white"
               >
                 <p><strong>Add a new booking</strong></p>
                 <button @click="resetForm"><IconX /></button>
@@ -425,7 +425,7 @@ onMounted(() => (bookings.value = inject<Booking[]>("bookings")))
               class="mx-2 h-2/3 w-fit transform overflow-auto border-2 border-b-8 border-black bg-white align-middle font-body shadow-xl transition-all xl:mx-0 xl:h-auto xl:w-2/4 xl:overflow-hidden"
             >
               <div
-                class="sticky top-0 z-[1] flex justify-between border-b-2 border-black bg-[#ff4758] p-4 text-white"
+                class="sticky top-0 z-[1] flex justify-between border-b-2 border-black bg-primary-color p-4 text-white"
               >
                 <p><strong>Add a new booking</strong></p>
                 <button @click="resetForm"><IconX /></button>
