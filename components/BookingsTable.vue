@@ -4,9 +4,23 @@ defineProps<{
   editBooking: (booking: Booking) => void
   removeBooking: (bookingID: number) => void
 }>()
+
+const filters = ref({
+  customerAge: { isActive: false },
+  customerEmail: { isActive: true },
+  customerGender: { isActive: false },
+  customerName: { isActive: true },
+  customerPhone: { isActive: true },
+  id: { isActive: true },
+  notes: { isActive: true },
+  paymentType: { isActive: true },
+  travelID: { isActive: true },
+})
 </script>
 
 <template>
+  <Filters :filters />
+
   <table
     class="my-10 w-full border-collapse border-2 border-b-8 border-black text-sm"
   >
@@ -15,13 +29,15 @@ defineProps<{
     >
       <tr class="text-xs [&_th]:px-2 [&_th]:py-4 [&_th]:text-start">
         <th>Actions</th>
-        <th>ID</th>
-        <th>Customer name</th>
-        <th>Customer email</th>
-        <th>Customer phone</th>
-        <th>Notes</th>
-        <th>Payment type</th>
-        <th>Travel ID</th>
+        <th v-if="filters.id.isActive">ID</th>
+        <th v-if="filters.customerName.isActive">Customer name</th>
+        <th v-if="filters.customerAge.isActive">Customer age</th>
+        <th v-if="filters.customerEmail.isActive">Customer email</th>
+        <th v-if="filters.customerGender.isActive">Customer gender</th>
+        <th v-if="filters.customerPhone.isActive">Customer phone</th>
+        <th v-if="filters.notes.isActive">Notes</th>
+        <th v-if="filters.paymentType.isActive">Payment type</th>
+        <th v-if="filters.travelID.isActive">Travel ID</th>
       </tr>
     </thead>
 
@@ -48,13 +64,23 @@ defineProps<{
             </button>
           </div>
         </td>
-        <td>{{ booking.id }}</td>
-        <td>{{ booking.customer.name }}</td>
-        <td>{{ booking.customer.email }}</td>
-        <td>{{ booking.customer.phone }}</td>
-        <td>{{ booking.notes }}</td>
-        <td>{{ booking.paymentType }}</td>
-        <td>{{ booking.travelId }}</td>
+        <td v-if="filters.id.isActive">{{ booking.id }}</td>
+        <td v-if="filters.customerName.isActive">
+          {{ booking.customer.name }}
+        </td>
+        <td v-if="filters.customerAge.isActive">{{ booking.customer.age }}</td>
+        <td v-if="filters.customerEmail.isActive">
+          {{ booking.customer.email }}
+        </td>
+        <td v-if="filters.customerGender.isActive">
+          {{ capitalize(booking.customer.gender) }}
+        </td>
+        <td v-if="filters.customerPhone.isActive">
+          {{ booking.customer.phone }}
+        </td>
+        <td v-if="filters.notes.isActive">{{ booking.notes }}</td>
+        <td v-if="filters.paymentType.isActive">{{ booking.paymentType }}</td>
+        <td v-if="filters.travelID.isActive">{{ booking.travelId }}</td>
       </tr>
     </tbody>
   </table>

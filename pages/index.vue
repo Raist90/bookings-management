@@ -68,8 +68,8 @@ function editTravel(travel: Travel): void {
   </div>
 
   <div>
-    <button @click="addTravel" class="button-base flex gap-2">
-      <IconCirclePlus /> Add a new travel
+    <button @click="addTravel" class="button-base button-primary flex gap-2">
+      <IconCirclePlus class="text-black" fill="white" /> Add a new travel
     </button>
   </div>
 
