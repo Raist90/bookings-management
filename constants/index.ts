@@ -1,7 +1,18 @@
-export { APP_NAME, NO_CLIENTSIDE, NO_SERVERSIDE, PICSUM_URL }
+export {
+  APP_NAME,
+  BOOKINGS_ROUTE,
+  NO_CLIENTSIDE,
+  NO_SERVERSIDE,
+  PICSUM_URL,
+  TRAVELS_ROUTE,
+}
 
 const APP_NAME = "WeRoad Test"
 const PICSUM_URL = "https://picsum.photos"
+
+// routes
+const BOOKINGS_ROUTE = "/bookings"
+const TRAVELS_ROUTE = "/"
 
 // error messages
 function NO_SERVERSIDE(funcName: string): string {

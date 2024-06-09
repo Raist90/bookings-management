@@ -39,6 +39,9 @@ export default defineNuxtConfig({
     "nuxt-lucide-icons",
     "nuxt-headlessui",
   ],
+  runtimeConfig: {
+    APP_URL: process.env.APP_URL,
+  },
   tailwindcss: {
     cssPath: ["assets/css/tailwind.css", { injectPosition: "first" }],
     configPath: "tailwind.config",
